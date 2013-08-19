@@ -7,7 +7,6 @@ let s:cpo_save = &cpo
 set cpo&vim
 
 setlocal iskeyword=@,@-@,48-57,_,192-255
-
 iabbr <expr> @n strftime('[%a %m/%d %H:%M]')
 
 " setup python
@@ -17,8 +16,15 @@ exec g:_vopy "new_path = vim.eval('expand(\"<sfile>:h\")')"
 exec g:_vopy "sys.path.append(new_path)"
 exec g:_vopy "import vimorg"
 
-command -nargs=* MyCommand :python vimorg.test()
+command! -nargs=* MyCommand :python vimorg.test()
 
+function! VimOrgFoldLevel(lnum)
+  exec g:_vopy "vimorg.FoldLevel(".a:lnum.")"
+  return l:foldLevel
+endfunction
+
+setlocal foldmethod=expr
+setlocal foldexpr=VimOrgFoldLevel(v:lnum)
 
 let &cpo = s:cpo_save
 unlet s:cpo_save
