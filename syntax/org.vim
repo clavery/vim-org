@@ -8,19 +8,18 @@ syntax keyword todoStates TODO APPT PAY BUY
 syntax keyword holdStates HOLD WAITING CLIENT
 syntax keyword doneStates DONE
 syntax keyword canceledStates CANCELED DEFERRED
-syntax match projectOne /^\s\{2\}\*\+\s\+.\+$/
-syntax match projectTwo /^\s\{4\}\*\+\s\+.\+$/
-syntax match projectRoot /^\*\s\+.\+$/
+syntax match projectOne /^\s\{2\}\*\+\s\+.\+$/ contains=holdStates,todoStates,doneStates,canceledStates
+syntax match projectTwo /^\s\{4\}\*\+\s\+.\+$/ contains=holdStates,todoStates,doneStates,canceledStates
+syntax match projectRoot /^\*\s\+.\+$/ contains=holdStates,todoStates,doneStates,canceledStates
 syntax match listStart /^\s\+-/
 syntax match questionStartTodo /^\s\+?/
 syntax match listStartDone /^\s\++.\+$/
 syntax match importantStart /^\s\{-}!.\+$/
-syntax match doneLine /DONE.\+$/
+syntax match doneLine /^\s*\*\sDONE.\+$/
 syntax match canceledLine /CANCELED.\+$/
 syn match taskDatestamp		display '\[... \d\d/\d\d \d\d:\d\d\]'
 syntax case ignore
 
-syntax region projectRegion start=/\*\+.\+/ end=/\(\*\+\)\@=/ transparent
 syntax region drawerRegion start=+:.\+:+ end=+:END:+
 
 hi def link todoStates Function
@@ -36,7 +35,7 @@ hi def link noteState Constant
 hi def link importantStart Keyword
 hi def link projectRoot Constant
 hi def link projectOne Function
-hi def link projectTwo Type
+hi def link projectTwo String
 hi def link holdStates Identifier
 
 hi Folded term=None ctermbg=None ctermfg=8 guibg=NONE
