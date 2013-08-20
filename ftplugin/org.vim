@@ -16,7 +16,8 @@ exec g:_vopy "new_path = vim.eval('expand(\"<sfile>:h\")')"
 exec g:_vopy "sys.path.append(new_path)"
 exec g:_vopy "import vimorg"
 
-command! -nargs=* MyCommand :python vimorg.test()
+command! -nargs=* VimOrgClockIn :python vimorg.clock_in()
+nnoremap <silent> <leader>qi :VimOrgClockIn<CR>
 
 function! VimOrgFoldLevel(lnum)
   exec g:_vopy "vimorg.FoldLevel(".a:lnum.")"
@@ -25,6 +26,8 @@ endfunction
 
 setlocal foldmethod=expr
 setlocal foldexpr=VimOrgFoldLevel(v:lnum)
+
+g/:LOGBOOK:/norm za
 
 let &cpo = s:cpo_save
 unlet s:cpo_save
