@@ -27,7 +27,8 @@ endfunction
 setlocal foldmethod=expr
 setlocal foldexpr=VimOrgFoldLevel(v:lnum)
 
-g/:LOGBOOK:/norm za
+silent! g/:LOGBOOK:/norm za
+silent! g/:PROPERTIES:/norm za
 
 let &cpo = s:cpo_save
 unlet s:cpo_save

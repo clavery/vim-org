@@ -39,4 +39,4 @@ hi def link projectOne Function
 hi def link projectTwo Type
 hi def link holdStates Identifier
 
-hi Folded term=None ctermbg=None ctermfg=8
+hi Folded term=None ctermbg=None ctermfg=8 guibg=NONE
