@@ -30,5 +30,13 @@ setlocal foldexpr=VimOrgFoldLevel(v:lnum)
 silent! g/:LOGBOOK:/norm za
 silent! g/:PROPERTIES:/norm za
 
+""" Project (fold) text objects
+" 'around fold' takes the entire project
+vnoremap af :<C-U>silent! normal! zcVza<CR>
+omap af :normal Vaf<CR>
+" Inner fold takes the projects contents but leaves the project line
+vnoremap if :<C-U>silent! normal! V]zoj<CR>
+omap if :normal Vif<CR>
+
 let &cpo = s:cpo_save
 unlet s:cpo_save

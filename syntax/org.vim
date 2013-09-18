@@ -8,9 +8,12 @@ syntax keyword todoStates TODO APPT PAY BUY
 syntax keyword holdStates HOLD WAITING CLIENT
 syntax keyword doneStates DONE
 syntax keyword canceledStates CANCELED DEFERRED
-syntax match projectOne /^\s\{2\}\*\+\s\+.\+$/ contains=holdStates,todoStates,doneStates,canceledStates
-syntax match projectTwo /^\s\{4\}\*\+\s\+.\+$/ contains=holdStates,todoStates,doneStates,canceledStates
-syntax match projectRoot /^\*\s\+.\+$/ contains=holdStates,todoStates,doneStates,canceledStates
+
+syntax match tag /\v:\w+:/
+
+syntax match projectOne /^\s\{2\}\*\+\s\+.\+$/ contains=holdStates,todoStates,doneStates,canceledStates,tag
+syntax match projectTwo /^\s\{4\}\*\+\s\+.\+$/ contains=holdStates,todoStates,doneStates,canceledStates,tag
+syntax match projectRoot /^\*\s\+.\+$/ contains=holdStates,todoStates,doneStates,canceledStates,tag
 syntax match listStart /^\s\+-/
 syntax match questionStartTodo /^\s\+?/
 syntax match listStartDone /^\s\++.\+$/
