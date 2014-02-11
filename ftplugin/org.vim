@@ -9,6 +9,8 @@ set cpo&vim
 setlocal iskeyword=@,@-@,48-57,_,192-255
 iabbr <expr> @n strftime('[%a %m/%d %H:%M]')
 
+setlocal suffixesadd=.rst,.org,.txt
+
 " setup python
 let g:_vopy=":py "
 exec g:_vopy "import vim, os, sys"
