@@ -23,6 +23,9 @@ syntax match canceledLine /CANCELED.\+$/
 syn match taskDatestamp		display '\[... \d\d/\d\d \d\d:\d\d\]'
 syntax case ignore
 
+syntax match  orgInlineURL /https\?:\/\/\(\w\+\(:\w\+\)\?@\)\?\([A-Za-z][-_0-9A-Za-z]*\.\)\{1,}\(\w\{2,}\.\?\)\{1,}\(:[0-9]\{1,5}\)\?\S*/
+hi def link orgInlineURL    Question
+
 syntax region drawerRegion start=+:.\+:+ end=+:END:+
 
 hi def link todoStates Function
