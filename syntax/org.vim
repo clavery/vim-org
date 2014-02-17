@@ -20,14 +20,16 @@ syntax match listStartDone /^\s\++.\+$/
 syntax match importantStart /^\s\{-}!.\+$/
 syntax match doneLine /^\s*\*\sDONE.\+$/
 syntax match canceledLine /CANCELED.\+$/
+syntax match fileRef /`.\+`/
 syn match taskDatestamp		display '\[... \d\d/\d\d \d\d:\d\d\]'
 syntax case ignore
 
 syntax match  orgInlineURL /https\?:\/\/\(\w\+\(:\w\+\)\?@\)\?\([A-Za-z][-_0-9A-Za-z]*\.\)\{1,}\(\w\{2,}\.\?\)\{1,}\(:[0-9]\{1,5}\)\?\S*/
-hi def link orgInlineURL    Question
 
 syntax region drawerRegion start=+:.\+:+ end=+:END:+
 
+hi def link fileRef    Question
+hi def link orgInlineURL    Question
 hi def link todoStates Function
 hi def link listStart Constant
 hi def link questionStartTodo Special
