@@ -26,19 +26,27 @@ function! VimOrgFoldLevel(lnum)
   return l:foldLevel
 endfunction
 
-setlocal foldmethod=expr
-setlocal foldexpr=VimOrgFoldLevel(v:lnum)
+setlocal foldmethod=indent
 
 silent! g/:LOGBOOK:/norm za
 silent! g/:PROPERTIES:/norm za
 
-""" Project (fold) text objects
-" 'around fold' takes the entire project
-vnoremap af :<C-U>silent! normal! zcVza<CR>
-omap af :normal Vaf<CR>
-" Inner fold takes the projects contents but leaves the project line
-vnoremap if :<C-U>silent! normal! V]zoj<CR>
-omap if :normal Vif<CR>
+function! ArchiveSelection() range
+  python from datetime import date
+  python wnum = "%s" % (date.today().isocalendar()[1])
+  python weeknum = wnum.zfill(2)
+  python datestr = date.today().strftime('%Y-%m')
+  let weeknum = pyeval('weeknum')
+  let datestr = pyeval('datestr')
+  let curfname = expand("%:r")
+  let archivefolder = expand('%:h') . "/Archive/" . datestr
+  let archivefname = archivefolder . "/" . curfname . "-Week-" . weeknum . ".org"
+  silent! call mkdir(archivefolder, 'p')
+  exec "'<,'>w! >>" . archivefname
+  norm gvd
+endfunction
+
+nnoremap <localleader>a :call ArchiveSelection()<cr>
 
 let &cpo = s:cpo_save
 unlet s:cpo_save
